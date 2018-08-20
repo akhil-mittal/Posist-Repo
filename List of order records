@@ -1,0 +1,117 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int increment=0;   //for nodenumber
+
+// time class
+class Time{
+    public:
+    int hour;
+    int minute;
+    
+    Time(){
+        time_t t = time(0);
+        tm* now = localtime(&t); 
+        minute = (now->tm_min+30)%60;
+        if(minute < 30)
+          hour = (now->tm_hour+6)%24;
+        else
+          hour = (now->tm_hour+5)%24;
+        
+    }
+};
+
+//date class
+class Date{
+    public:
+    int DD;
+    int MM;
+    int YY;
+    Date(){
+        time_t t = time(0);
+        tm* now = localtime(&t); 
+        DD = now->tm_year + 1900;
+        MM = now->tm_mon + 1;
+        YY = now->tm_mday;
+    }
+};
+
+
+//Owner's Data class
+class Data{
+    char owner_name[30];
+    char address[50];
+    int mobile;
+    int phone;
+    float value;
+};
+
+//Node class
+class Node : public Time,public Date, public Data{
+    
+    public:
+    int nodenumber;      //nodenumber
+    int nodeid;         //unique_id
+    Node *parent;       //ReferenceNodeId
+    int childNodeId;
+    Node* child;    //ReferenceChildNodeId
+
+    Node(){
+        nodenumber = ++increment;
+        parent = NULL;
+        child = NULL;
+        nodeid = nodenumber;
+    }
+};
+
+void FirstNodeCreation(Node *&head){
+    if(head!=NULL){
+        cout<<"First node already created"<<endl;
+        return;
+    }
+
+    Node* n = new Node;
+    head = n;
+    cout<<"First Node Created"<<endl;
+    return;
+}
+
+int main() {
+    Node* head=NULL;
+   do{
+       cout<<"Press 1 to create first node"<<endl;
+       cout<<"Press 2 to create multiset of first node according to nodenumber"<<endl;
+       cout<<"Press 3 to add a new node to particuler set"<<endl;
+       cout<<"Press 4 to provide data and encryption"<<endl;
+       cout<<"Press 5 to verify the owner"<<endl;
+       cout<<"Press 6 to breaking up the node or subnode by owner"<<endl;
+       cout<<"Press 7 to transfer ownership"<<endl;
+       cout<<"Press 8 to longest chain of main node"<<endl;
+       cout<<"Press 9 to longest chain of subnode"<<endl;
+       cout<<"Press 10 to merge two different set node"<<endl;
+       cout<<"Press 0 to exit"<<endl;
+        int option;
+        cin>>option;
+       switch(option){
+           case 1:FirstNodeCreation(head);
+                  break;
+           case 2:
+           case 3:
+           case 4:
+           case 5:
+           case 6:
+           case 7:
+           case 8:
+           case 9:
+           case 10:
+           case -1 :cout<<"Successfully exit";
+                   exit(0);
+                
+           default:cout<<"Please enter corrext option\n";
+                   break;
+       }
+   }while(true);
+    
+    return 0;
+  
+}
